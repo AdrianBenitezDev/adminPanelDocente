@@ -1,0 +1,30 @@
+﻿{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "adminpanel"
+    }
+  ],
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/admin/users",
+        "function": "api"
+      },
+      {
+        "source": "/health",
+        "function": "api"
+      },
+      {
+        "source": "**",
+        "destination": "/admin.html"
+      }
+    ]
+  }
+}
