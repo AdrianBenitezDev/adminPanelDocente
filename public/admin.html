@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PanelDocente | Admin</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="hero">
+      <p class="chip">PanelDocente</p>
+      <h1>Panel de Administrador</h1>
+      <p class="subtitle">Visualiza usuarios de Firebase Authentication y sus datos en Firestore.</p>
+    </section>
+
+    <section class="toolbar">
+      <label for="adminKey">Clave admin (si aplica)</label>
+      <input id="adminKey" type="password" placeholder="x-admin-key" autocomplete="off" />
+      <button id="saveKeyBtn" type="button">Guardar clave</button>
+      <button id="reloadBtn" type="button">Recargar usuarios</button>
+      <small id="status">Cargando...</small>
+    </section>
+
+    <section class="table-card">
+      <div class="table-header">
+        <h2>Usuarios</h2>
+        <p id="totals">Total: 0</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>UID</th>
+              <th>Email</th>
+              <th>Nombre</th>
+              <th>Verificado</th>
+              <th>Estado</th>
+              <th>Ultimo acceso</th>
+              <th>Datos Firebase</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detailDialog">
+    <article class="dialog-content">
+      <header>
+        <h3>Detalle de usuario</h3>
+        <button id="closeDialogBtn" type="button" class="close-btn">Cerrar</button>
+      </header>
+      <pre id="detailJson"></pre>
+    </article>
+  </dialog>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

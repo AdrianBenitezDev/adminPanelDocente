@@ -1,0 +1,22 @@
+{
+  "name": "adminpaneldocente",
+  "version": "1.0.0",
+  "description": "Panel de administrador para listar usuarios y datos en Firebase",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "firebase",
+    "admin",
+    "panel"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "firebase": "^12.11.0",
+    "firebase-admin": "^13.6.0"
+  }
+}
