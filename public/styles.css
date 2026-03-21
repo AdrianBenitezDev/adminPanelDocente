@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg-1: #f3f7ff;
   --bg-2: #dde8ff;
   --ink: #13213a;
@@ -26,7 +26,7 @@ body {
 }
 
 .layout {
-  width: min(1200px, 94vw);
+  width: min(1280px, 94vw);
   margin: 2rem auto;
   display: grid;
   gap: 1rem;
@@ -63,6 +63,7 @@ h1 {
 }
 
 .toolbar,
+.filters-card,
 .table-card {
   background: var(--card);
   border: 1px solid var(--line);
@@ -71,13 +72,16 @@ h1 {
   box-shadow: 0 12px 30px rgba(19, 33, 58, 0.06);
 }
 
-.toolbar {
+.toolbar,
+.filters-card {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.6rem;
 }
 
-.toolbar input {
+.toolbar input,
+.filters-card input,
+.filters-card select {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.65rem 0.8rem;
@@ -118,7 +122,7 @@ h1 {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 880px;
+  min-width: 1100px;
 }
 
 thead th {
@@ -133,7 +137,7 @@ thead th {
 tbody td {
   border-bottom: 1px solid #eef2fa;
   padding: 0.75rem 0.5rem;
-  vertical-align: top;
+  vertical-align: middle;
   font-size: 0.92rem;
 }
 
@@ -143,29 +147,60 @@ tbody tr:hover {
 
 .badge {
   border-radius: 999px;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.6rem;
   font-size: 0.76rem;
   font-weight: 700;
+  display: inline-block;
 }
 
-.badge.ok {
+.badge.ok,
+.badge.pay-active {
   background: #e6faf5;
   color: #0a5e54;
 }
 
-.badge.warn {
+.badge.warn,
+.badge.pay-overdue {
   background: #ffefec;
   color: var(--danger);
 }
 
-.link-btn {
+.badge.pay-pending {
+  background: #fff7dd;
+  color: #8c5d00;
+}
+
+.badge.pay-canceled {
+  background: #eef2f7;
+  color: #4f6178;
+}
+
+.badge.pay-unknown {
+  background: #edf4ff;
+  color: #295d99;
+}
+
+.action-btn {
   border: 0;
   border-radius: 8px;
   padding: 0.45rem 0.7rem;
-  background: #eaf1ff;
-  color: #234b86;
   cursor: pointer;
   font-weight: 600;
+}
+
+.action-btn.disable {
+  background: #ffefec;
+  color: #a93d2d;
+}
+
+.action-btn.enable {
+  background: #e6faf5;
+  color: #0a5e54;
+}
+
+.action-btn.details {
+  background: #eaf1ff;
+  color: #234b86;
 }
 
 dialog {
@@ -215,5 +250,10 @@ pre {
   .toolbar {
     grid-template-columns: 1.6fr auto auto auto;
     align-items: end;
+  }
+
+  .filters-card {
+    grid-template-columns: 1.6fr 1fr 1fr;
+    align-items: center;
   }
 }

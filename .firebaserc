@@ -1,5 +1,14 @@
-﻿{
+{
   "projects": {
     "default": "horario-escuelas"
+  },
+  "targets": {
+    "horario-escuelas": {
+      "hosting": {
+        "adminpanel": [
+          "adminpaneldocente"
+        ]
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
     <section class="hero">
       <p class="chip">PanelDocente</p>
       <h1>Panel de Administrador</h1>
-      <p class="subtitle">Visualiza usuarios de Firebase Authentication y sus datos en Firestore.</p>
+      <p class="subtitle">Gestiona usuarios, estado de acceso y estado de pago desde un solo lugar.</p>
     </section>
 
     <section class="toolbar">
@@ -22,22 +22,40 @@
       <small id="status">Cargando...</small>
     </section>
 
+    <section class="filters-card">
+      <input id="searchInput" type="search" placeholder="Buscar por email o nombre" autocomplete="off" />
+      <select id="paymentFilter">
+        <option value="all">Todos los pagos</option>
+        <option value="active">Activos</option>
+        <option value="pending">Pendientes</option>
+        <option value="overdue">Vencidos</option>
+        <option value="canceled">Cancelados</option>
+        <option value="unknown">Sin datos</option>
+      </select>
+      <select id="userFilter">
+        <option value="all">Todos los usuarios</option>
+        <option value="enabled">Habilitados</option>
+        <option value="disabled">Deshabilitados</option>
+      </select>
+    </section>
+
     <section class="table-card">
       <div class="table-header">
         <h2>Usuarios</h2>
-        <p id="totals">Total: 0</p>
+        <p id="totals">Mostrando 0 de 0</p>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>UID</th>
               <th>Email</th>
               <th>Nombre</th>
-              <th>Verificado</th>
-              <th>Estado</th>
+              <th>Usuario</th>
+              <th>Pago</th>
+              <th>Proximo pago</th>
               <th>Ultimo acceso</th>
-              <th>Datos Firebase</th>
+              <th>Acciones</th>
+              <th>Detalle</th>
             </tr>
           </thead>
           <tbody id="usersTableBody"></tbody>

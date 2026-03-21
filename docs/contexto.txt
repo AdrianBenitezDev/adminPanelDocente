@@ -1,0 +1,73 @@
+ADMINPANELDOCENTE - CONTEXTO OPERATIVO
+Fecha de actualizacion: 2026-03-21
+
+1) Que es este proyecto
+- Carpeta: adminPanelDocente
+- Objetivo: panel de administracion para listar usuarios de Firebase Auth y datos de Firestore por uid.
+- Frontend: carpeta public (admin.html, admin.js, styles.css).
+- API local: server.js (Express + Firebase Admin SDK).
+- API deployada: Cloud Function Gen2 (codebase: adminpanel, funcion: api).
+
+2) Relacion con paneldocente.com.ar
+- Este proyecto NO es la web principal paneldocente.
+- La web principal esta en otra carpeta local: ..\\GestorPlantelDocente
+- Ambas webs usan el MISMO proyecto Firebase: horario-escuelas.
+
+3) Riesgo principal (muy importante)
+- Como ambos repos usan el mismo proyecto Firebase (horario-escuelas), si se despliega al hosting equivocado, una web puede pisar a la otra.
+- Esto ya ocurrio una vez y se restauro desplegando hosting desde ..\\GestorPlantelDocente.
+
+4) Aislamiento correcto de hosting (implementado)
+- En este repo se creo un hosting site separado para admin:
+  - Site: adminpaneldocente
+- .firebaserc en este repo define target:
+  - target hosting: adminpanel -> adminpaneldocente
+- firebase.json en este repo usa hosting por target:
+  - "target": "adminpanel"
+
+5) Reglas de deploy seguras
+- Desde adminPanelDocente, usar SIEMPRE:
+  - firebase deploy --only hosting:adminpanel --project horario-escuelas
+- Si tambien se actualiza la funcion API del admin:
+  - firebase deploy --only functions:adminpanel,hosting:adminpanel --project horario-escuelas
+- Evitar comandos ambiguos cuando haya dudas de carpeta/proyecto.
+
+6) Regla de oro antes de deploy
+Checklist obligatorio:
+- Estoy parado en carpeta correcta? (adminPanelDocente o GestorPlantelDocente)
+- Revisar .firebaserc del repo actual.
+- Revisar firebase.json del repo actual.
+- Confirmar --only con target explicito.
+
+7) Comandos de verificacion recomendados
+- Ver carpeta actual:
+  - pwd
+- Ver proyecto y targets:
+  - type .firebaserc
+- Ver hosting configurado:
+  - type firebase.json
+- Deploy admin seguro:
+  - firebase deploy --only hosting:adminpanel --project horario-escuelas
+
+8) Como recuperar si se pisa la web principal
+- Ir a carpeta principal:
+  - cd ..\\GestorPlantelDocente
+- Restaurar hosting principal:
+  - firebase deploy --only hosting --project horario-escuelas
+
+9) Datos de arquitectura del admin
+- Endpoint principal:
+  - GET /api/admin/users
+- Seguridad opcional:
+  - header x-admin-key
+  - ADMIN_PANEL_KEY en entorno local
+  - o functions config admin.key en deploy
+- Colecciones Firestore consultadas por uid:
+  - variable USER_COLLECTIONS (por defecto users)
+
+10) Nota operativa final
+- Mismo proyecto Firebase NO implica mismo hosting site.
+- Mantener separados:
+  - Web principal: paneldocente.com.ar (repo GestorPlantelDocente)
+  - Web admin: adminpaneldocente.web.app (repo adminPanelDocente)
+- Nunca desplegar sin confirmar carpeta + target + --only.
