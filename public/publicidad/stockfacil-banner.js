@@ -64,9 +64,9 @@
     : './publicidad/';
 
   const stockfacilBanners = [
-    new URL('banner_1.png', assetsBase).toString(),
-    new URL('banner_2.png', assetsBase).toString(),
-    new URL('banner_3.png', assetsBase).toString()
+    new URL('banner_1.webp', assetsBase).toString(),
+    new URL('banner_2.webp', assetsBase).toString(),
+    new URL('banner_3.webp', assetsBase).toString()
   ];
 
   if(!(stockfacilModal && stockfacilImage)){
