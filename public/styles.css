@@ -62,9 +62,46 @@ h1 {
   color: var(--muted);
 }
 
+.view-switch {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.view-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  font-weight: 700;
+  color: #365378;
+  transition: all 0.15s ease;
+}
+
+.view-btn:hover {
+  transform: translateY(-1px);
+}
+
+.view-btn.active {
+  background: #e9fff6;
+  border-color: #bde9df;
+  color: #0a5e54;
+}
+
+.view-card {
+  display: grid;
+  gap: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
 .toolbar,
 .filters-card,
-.table-card {
+.table-card,
+.registro-controls {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -73,7 +110,8 @@ h1 {
 }
 
 .toolbar,
-.filters-card {
+.filters-card,
+.registro-controls {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.6rem;
@@ -81,27 +119,40 @@ h1 {
 
 .toolbar input,
 .filters-card input,
-.filters-card select {
+.filters-card select,
+.registro-controls select {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.65rem 0.8rem;
   font-size: 0.95rem;
 }
 
-.toolbar button {
+.toolbar button,
+.registro-controls button {
   border: 0;
   border-radius: 10px;
   padding: 0.65rem 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  background: var(--accent);
   color: #fff;
   transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.toolbar button {
+  background: var(--accent);
 }
 
 .toolbar button:hover {
   transform: translateY(-1px);
   background: var(--accent-dark);
+}
+
+.registro-controls button {
+  background: #2f73d6;
+}
+
+.registro-controls button:hover {
+  background: #2559a7;
 }
 
 #status {
@@ -203,6 +254,39 @@ tbody tr:hover {
   color: #234b86;
 }
 
+.action-btn.whitelist-add {
+  background: #e6faf5;
+  color: #0a5e54;
+}
+
+.action-btn.whitelist-remove {
+  background: #ffefec;
+  color: var(--danger);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ffefec;
+  color: var(--danger);
+}
+
+.icon-btn svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.icon-btn:hover {
+  background: #ffdcd5;
+}
+
 dialog {
   border: 0;
   padding: 0;
@@ -255,5 +339,10 @@ pre {
   .filters-card {
     grid-template-columns: 1.6fr 1fr 1fr;
     align-items: center;
+  }
+
+  .registro-controls {
+    grid-template-columns: auto 1.6fr auto 1fr;
+    align-items: end;
   }
 }

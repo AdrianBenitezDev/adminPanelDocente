@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PanelDocente | Admin</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./publicidad/stockfacil-banner.css" />
 </head>
 <body>
   <main class="layout">
@@ -12,6 +13,12 @@
       <p class="chip">PanelDocente</p>
       <h1>Panel de Administrador</h1>
       <p class="subtitle">Gestiona usuarios, estado de acceso y estado de pago desde un solo lugar.</p>
+    </section>
+
+    <section class="view-switch">
+      <button id="viewGeneralBtn" type="button" class="view-btn active" data-view="general">General</button>
+      <button id="viewWhitelistBtn" type="button" class="view-btn" data-view="whitelist">Whitelist</button>
+      <button id="viewRegistroBtn" type="button" class="view-btn" data-view="registro">Registro</button>
     </section>
 
     <section class="toolbar">
@@ -22,45 +29,103 @@
       <small id="status">Cargando...</small>
     </section>
 
-    <section class="filters-card">
-      <input id="searchInput" type="search" placeholder="Buscar por email o nombre" autocomplete="off" />
-      <select id="paymentFilter">
-        <option value="all">Todos los pagos</option>
-        <option value="active">Activos</option>
-        <option value="pending">Pendientes</option>
-        <option value="overdue">Vencidos</option>
-        <option value="canceled">Cancelados</option>
-        <option value="unknown">Sin datos</option>
-      </select>
-      <select id="userFilter">
-        <option value="all">Todos los usuarios</option>
-        <option value="enabled">Habilitados</option>
-        <option value="disabled">Deshabilitados</option>
-      </select>
+    <section id="generalView" class="view-card">
+      <section class="filters-card">
+        <input id="searchInput" type="search" placeholder="Buscar por email o nombre" autocomplete="off" />
+        <select id="paymentFilter">
+          <option value="all">Todos los pagos</option>
+          <option value="active">Activos</option>
+          <option value="pending">Pendientes</option>
+          <option value="overdue">Vencidos</option>
+          <option value="canceled">Cancelados</option>
+          <option value="unknown">Sin datos</option>
+        </select>
+        <select id="userFilter">
+          <option value="all">Todos los usuarios</option>
+          <option value="enabled">Habilitados</option>
+          <option value="disabled">Deshabilitados</option>
+        </select>
+      </section>
+
+      <section class="table-card">
+        <div class="table-header">
+          <h2>Usuarios</h2>
+          <p id="totals">Mostrando 0 de 0</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Pago</th>
+                <th>Proximo pago</th>
+                <th>Ultimo acceso</th>
+                <th>Acciones</th>
+                <th>Detalle</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
-    <section class="table-card">
-      <div class="table-header">
-        <h2>Usuarios</h2>
-        <p id="totals">Mostrando 0 de 0</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Nombre</th>
-              <th>Usuario</th>
-              <th>Pago</th>
-              <th>Proximo pago</th>
-              <th>Ultimo acceso</th>
-              <th>Acciones</th>
-              <th>Detalle</th>
-            </tr>
-          </thead>
-          <tbody id="usersTableBody"></tbody>
-        </table>
-      </div>
+    <section id="whitelistView" class="view-card hidden">
+      <section class="table-card">
+        <div class="table-header">
+          <h2>Whitelist</h2>
+          <p id="whitelistTotals">Mostrando 0 de 0</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Tenant</th>
+                <th>Estado whitelist</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody id="whitelistTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section id="registroView" class="view-card hidden">
+      <section class="registro-controls">
+        <label for="registroUserSelect">Usuario</label>
+        <select id="registroUserSelect">
+          <option value="">Selecciona un usuario</option>
+        </select>
+        <button id="loadRegistroBtn" type="button">Ver ultimos 5</button>
+        <small id="registroStatus">Selecciona un usuario para consultar.</small>
+      </section>
+
+      <section class="table-card">
+        <div class="table-header">
+          <h2>Registro PAC (ultimos 5)</h2>
+          <p id="registroTotals">Mostrando 0</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha recepcion</th>
+                <th>Asunto</th>
+                <th>Origen</th>
+                <th>Rows</th>
+                <th>Estado</th>
+                <th>Detalle</th>
+              </tr>
+            </thead>
+            <tbody id="registroTableBody"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
@@ -74,6 +139,10 @@
     </article>
   </dialog>
 
+  <div id="stockfacil-banner-slot"></div>
+  <script src="./publicidad/stockfacil-banner.js" defer></script>
   <script src="/admin.js"></script>
 </body>
 </html>
+
+
